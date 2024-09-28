@@ -1,11 +1,12 @@
+# todo_list/todo_app/models.py
 from django.db import models
-
-from django.utils import timezone
 from django.urls import reverse
+from django.utils import timezone
 
-# Create your models here.
+
 def one_week_hence():
     return timezone.now() + timezone.timedelta(days=7)
+
 
 class ToDoList(models.Model):
     title = models.CharField(max_length=100, unique=True)
@@ -15,6 +16,7 @@ class ToDoList(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class ToDoItem(models.Model):
     title = models.CharField(max_length=100)
