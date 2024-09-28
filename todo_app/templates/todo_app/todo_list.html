@@ -5,7 +5,7 @@
 <div>
     <div>
         <div>
-            <h3>Edit list:</h3>
+            <!-- <h3>Edit list:</h3> -->
             <h5>{{ todo_list.title|upper}}</h5>
         </div>
         <ul>
@@ -23,7 +23,7 @@
             {% endfor %}
         </ul>
         <p>
-            <input value="Add a new item" type="button" onclick="location.href='{% url "item-add" todo_list.id %}'" />
+            <input value="Создать новую задачу" type="button" onclick="location.href='{% url "item-add" todo_list.id %}'" />
             <input value="Delete this list" type="button"
                 onclick="location.href='{% url "list-delete" todo_list.id %}'" />
         </p>

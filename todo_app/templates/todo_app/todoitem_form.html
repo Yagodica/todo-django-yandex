@@ -9,10 +9,10 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Подтвердить">
     <input value="Cancel" type="button" onclick="location.href='{% url "list" todo_list.id %}'">
     {% if object %}
-    <input value="Delete this item" type="button"
+    <input value="Удалить эту задачу" type="button"
         onclick="location.href='{% url "item-delete" todo_list.id object.id %}'">
     {% endif %}
 </form>

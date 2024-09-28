@@ -10,10 +10,10 @@
             {% csrf_token %}
             {{ form.as_p }}
             <input
-                value="Save"
+                value="Сохранить"
                 type="submit">
             <input
-                value="Cancel"
+                value="Отмена"
                 type="button"
                 onclick="location.href='{% url "index" %}';">
         </form>
