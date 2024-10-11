@@ -1,179 +1,51 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 .header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
 }
 
 .header a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 24px;
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .header a:hover {
-    text-decoration: underline;
+  background-color: #ddd;
+  color: black;
 }
 
-.header p {
-    margin: 10px 0 0;
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
 }
 
-.header p a {
-    color: #fff;
-    text-decoration: none;
+.header-right {
+  float: right;
 }
 
-.header p a:hover {
-    text-decoration: underline;
-}
-
-.header form {
-    display: inline;
-}
-
-.header button {
-    background-color: #ff4d4d;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.header button:hover {
-    background-color: #ff1a1a;
-}
-
-.content {
-    padding: 20px;
-}
-
-h3 {
-    color: #333;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #fff;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-li div {
-    cursor: pointer;
-}
-
-input[type="button"], input[type="submit"] {
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-input[type="button"]:hover, input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-form p {
-    margin-bottom: 15px;
-}
-
-form table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-form table td {
-    padding: 10px;
-}
-
-form label {
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    text-align: left;
+  }
+  .header-right {
+    float: none;
+  }
 }
-
-form input[type="text"], form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-form input[type="text"], form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 5px;
-}
-
-form button[type="submit"] {
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-}
-
-form button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.errorlist {
-    color: #ff0000;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #ffe6e6;
-    border: 1px solid #ff0000;
-    border-radius: 5px;
-}
-
-.errorlist li {
-    list-style-type: none;
-}
-
-form table input[type="text"], form table textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form table input[type="submit"], form table input[type="button"] {
-    margin-top: 10px;
-}
-
