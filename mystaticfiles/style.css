@@ -1,82 +1,179 @@
-body { 
-  background: rgb(0,0,0);
-  background: radial-gradient(circle, rgba(0,0,0,0.028124999999999956) 0%, rgba(253,187,45,1) 100%);
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 50px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#todo-container {
-  background: rgb(41, 33, 33);
-  width: 400px;
-  margin: 0 auto;
-  border: 2px solid #0033ff;
-  padding: 20px;
-  color: white;
-  border-radius: 15px;
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
 }
 
-#header {
-  margin: 5px;
-  font-size: 20px;
-  text-align: center;
+.header a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
 }
 
-h1 {
-  margin-bottom: 20px; 
+.header a:hover {
+    text-decoration: underline;
 }
 
-#input-box {
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 5px;
-  font-size: 20px;
+.header p {
+    margin: 10px 0 0;
 }
 
-#input-button {
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.4s;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #2e60ea;
+.header p a {
+    color: #fff;
+    text-decoration: none;
 }
 
-#input-button:hover {
-  background-color: #9eb7fd; 
+.header p a:hover {
+    text-decoration: underline;
+}
+
+.header form {
+    display: inline;
+}
+
+.header button {
+    background-color: #ff4d4d;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: #ff1a1a;
+}
+
+.content {
+    padding: 20px;
+}
+
+h3 {
+    color: #333;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  text-align:left;
-
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
-border: 1px solid white;
-border-radius: 5px;
-margin-bottom: 10px;
-padding: 10px;
-margin-top: 10px;
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.edit-btn, .delete-btn {
-  float: right;
-  color:crimson;
-  cursor: pointer;
-  margin: 3px 5px;
-  border: none;
-  padding: 3px 5px;
-  background: none;
-} 
-
-.completed {
-  text-decoration: line-through;
-  color: gray;
-  border: 1px solid gray;
+li div {
+    cursor: pointer;
 }
+
+input[type="button"], input[type="submit"] {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+form table td {
+    padding: 10px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"], form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+form input[type="text"], form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+form button[type="submit"] {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.errorlist {
+    color: #ff0000;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffe6e6;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+}
+
+.errorlist li {
+    list-style-type: none;
+}
+
+form table input[type="text"], form table textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form table input[type="submit"], form table input[type="button"] {
+    margin-top: 10px;
+}
+
