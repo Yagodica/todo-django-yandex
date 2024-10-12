@@ -16,14 +16,18 @@
         <a class="logo" href="{% url 'index' %}">To-do List</a>
         <div class="header-right">
             {% if user.is_authenticated %}
-                <p>Welcome, {{ user.username }}!
+                <p class="user">
+                    {{ user.username }}
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button type="submit">Logout</button>
                     </form>
                 </p>
             {% else %}
-                <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a></p>
+                <p>
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                </p>
             {% endif %}
         </div>
     </div>
