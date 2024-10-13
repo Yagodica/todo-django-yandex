@@ -31,9 +31,22 @@
             {% endif %}
         </div>
     </div>
-    <div class="content">
-        {% block content %}
-        {% endblock %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <div class="sidebar">
+                {% block sidebar %}
+                {% endblock %}
+            </div>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        {% else %}
+            <div class="login-and-signup">
+                {% block login_and_signup %}
+                {% endblock %}
+            </div>
+        {% endif %}
     </div>
 </body>
 

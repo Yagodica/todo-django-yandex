@@ -2,29 +2,20 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: black;
-    color: white;
-}
-
-@media screen and (prefers-color-scheme: light) {
-    body {
-        background-color: white;
-        color: black;
-    }
 }
 
 .header {
-    background-color: #333;
+    background-color: #f8f9fa;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header a {
-    color: white;
+.header .logo {
     text-decoration: none;
-    font-size: 1.2em;
+    color: #000;
+    font-size: 24px;
 }
 
 .header-right {
@@ -34,158 +25,72 @@ body {
 
 .header-right p {
     margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.user {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #fff;
-    margin-right: 20px;
-}
-
-form {
-    display: inline-block;
-}
-
-.header-right form {
-    margin-left: 15px; 
 }
 
 .header-right a {
-    color: white;
+    margin-left: 15px;
     text-decoration: none;
-    margin-left: 20px;
-    font-size: 1em;
-    transition: color 0.3s ease;
+    color: #000;
 }
 
-.header-right a:hover {
-    color: #ff4d4d;
-}
-
-.content {
+.container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    background-color: #f0f0f0;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #f8f9fa;
     padding: 20px;
-    box-sizing: border-box;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.content h3 {
-    width: 300px;
+.sidebar h2 {
+    margin-top: 0;
 }
 
-.content ul {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    flex-wrap: wrap;
-    justify-content: center;
+.sidebar ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-
-
-li {
-    background-color: #fff;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.sidebar ul li {
+    margin-bottom: 10px;
 }
 
-li:hover {
-    background-color: #ccc
+.main-content {
+    width: 80%;
+    padding: 20px;
 }
 
-
-input[type="button"] {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+.login-and-signup {
+    width: 100%;
+    padding: 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
 }
 
-input[type="button"]:hover {
-    background-color: #45a049;
+.login-and-signup form {
+    margin-bottom: 20px;
 }
 
+.login-and-signup label {
+    display: block;
+    margin-bottom: 5px;
+}
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+.login-and-signup input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-and-signup button {
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     cursor: pointer;
-    border-radius: 4px;
 }
-
-button:hover {
-    background-color: #45a049;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-}
-
-select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    resize: vertical;
-}
-
-textarea:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
