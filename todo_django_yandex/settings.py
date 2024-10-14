@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todolist',
+    'todo_auth',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -55,8 +56,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = 'index'
-# LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
