@@ -17,6 +17,7 @@
 <div class="ui menu">
     <a class="item" href="{% url 'index' %}">Главная</a>
     {% if user.is_authenticated %}
+        <span class="item">Привет, {{ user.username }}!</span>
         <form method="post" action="{% url 'logout' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="ui item">Выйти</button>
