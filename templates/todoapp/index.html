@@ -1,0 +1,202 @@
+{% extends 'todoapp/layout.html' %}
+
+{% block content %}
+
+<div style="margin-top: 50px;" class="ui container">
+    {% if messages %}
+        <div class="ui message">
+            {% for message in messages %}
+                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h1 class="ui center aligned header">Мой менеджер задач</h1>
+    <h3 class="test_style">Управляй своим временем!</h3>
+    <button class="ui teal basic button full-width-button" id="add-todo-button">Добавить задачу</button>
+
+    {% for todo in todo_list %}
+    <div class="ui segment" id="todo-{{ todo.id }}">
+        <p class="ui big header">{{ todo.title }}</p>
+        {% if todo.description %}
+            <p class="description-preview">{{ todo.description|truncatewords:10 }}</p>
+        {% endif %}
+        {% if todo.time %}
+            <p class="time-preview">{{ todo.time }}</p>
+        {% endif %}
+
+        <button class="ui basic button toggle-button {% if todo.is_complete %}green{% else %}gray{% endif %}" data-todo-id="{{ todo.id }}">
+            {% if todo.is_complete %}Завершено{% else %}Не завершено{% endif %}
+        </button>
+
+        <button class="ui basic button edit-button" data-todo-id="{{ todo.id }}" data-title="{{ todo.title }}" data-description="{{ todo.description }}" data-time="{{ todo.time }}">Редактировать</button>
+
+        <a class="ui negative basic button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="add-modal" class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">Добавить задачу</div>
+    <div class="content">
+        <form class="ui form" id="add-form" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label>Название</label>
+                <input type="text" name="title" id="add-title" placeholder="Введите название задачи">
+            </div>
+            <div class="field">
+                <label>Описание</label>
+                <textarea name="description" id="add-description" placeholder="Введите описание задачи"></textarea>
+            </div>
+            <div class="field">
+                <label>Время</label>
+                <input type="time" name="time" id="add-time">
+            </div>
+            <button class="ui button" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+<div id="edit-modal" class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">Редактировать задачу</div>
+    <div class="content">
+        <form class="ui form" id="edit-form" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label>Название</label>
+                <input type="text" name="title" id="edit-title" placeholder="Введите название задачи">
+            </div>
+            <div class="field">
+                <label>Описание</label>
+                <textarea name="description" id="edit-description" placeholder="Введите описание задачи"></textarea>
+            </div>
+            <div class="field">
+                <label>Время</label>
+                <input type="time" name="time" id="edit-time">
+            </div>
+            <input type="hidden" name="todo_id" id="edit-todo-id">
+            <button class="ui button" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#add-todo-button').click(function() {
+        $('#add-modal').modal('show');
+    });
+
+    $('#add-form').submit(function(event) {
+        event.preventDefault();
+        var title = $('#add-title').val();
+        var description = $('#add-description').val();
+        var time = $('#add-time').val();
+        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+        $.ajax({
+            url: '{% url 'add' %}',
+            type: 'POST',
+            data: {
+                csrfmiddlewaretoken: csrfToken,
+                title: title,
+                description: description,
+                time: time
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error adding to-do item:', error);
+            }
+        });
+    });
+
+    $('.toggle-button').click(function() {
+        var todoId = $(this).data('todo-id');
+        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+        $.ajax({
+            url: '{% url 'update' todo_id=0 %}'.replace('0', todoId),
+            type: 'POST',
+            data: {
+                csrfmiddlewaretoken: csrfToken
+            },
+            success: function(response) {
+                var todoSegment = $('#todo-' + todoId);
+                if (response.is_complete) {
+                    todoSegment.find('.toggle-button').removeClass('gray').addClass('green').text('Завершено');
+                } else {
+                    todoSegment.find('.toggle-button').removeClass('green').addClass('gray').text('Не завершено');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error updating to-do item:', error);
+            }
+        });
+    });
+
+    $('.edit-button').click(function() {
+        var todoId = $(this).data('todo-id');
+        var title = $(this).data('title');
+        var description = $(this).data('description');
+        var time = $(this).data('time');
+
+        $('#edit-todo-id').val(todoId);
+        $('#edit-title').val(title);
+        $('#edit-description').val(description);
+        $('#edit-time').val(time);
+
+        $('#edit-modal').modal('show');
+    });
+
+    $('#edit-form').submit(function(event) {
+        event.preventDefault();
+        var todoId = $('#edit-todo-id').val();
+        var title = $('#edit-title').val();
+        var description = $('#edit-description').val();
+        var time = $('#edit-time').val();
+        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+        $.ajax({
+            url: '{% url 'edit' todo_id=0 %}'.replace('0', todoId),
+            type: 'POST',
+            data: {
+                csrfmiddlewaretoken: csrfToken,
+                title: title,
+                description: description,
+                time: time
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error editing to-do item:', error);
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.full-width-button {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.description-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    max-height: 3.6em; /* Adjust this value based on your line height */
+}
+</style>
+
+{% endblock content %}
