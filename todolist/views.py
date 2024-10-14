@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth import logout
 from .models import ToDo
 
 def index(request):
@@ -50,3 +51,8 @@ def delete(request, todo_id):
     except ToDo.DoesNotExist:
         messages.error(request, 'To-do item does not exist.')
     return redirect('index')
+
+@require_http_methods(['POST'])
+def logout_view(request):
+    logout(request)
+    return redirect('login')

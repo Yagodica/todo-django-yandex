@@ -1,0 +1,12 @@
+{% extends 'todoapp/layout.html' %}
+
+{% block content %}
+<div class="ui container" style="margin-top: 50px;">
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="ui button" type="submit">Войти</button>
+    </form>
+</div>
+{% endblock content %}
