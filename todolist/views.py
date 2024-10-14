@@ -12,8 +12,9 @@ def index(request):
 def add(request):
     title = request.POST.get('title', '').strip()
     description = request.POST.get('description', '').strip()
+    time = request.POST.get('time', '')
     if title:
-        todo = ToDo(title=title, description=description)
+        todo = ToDo(title=title, description=description, time=time)
         todo.save()
         messages.success(request, 'To-do item added successfully.')
     else:
@@ -35,6 +36,7 @@ def edit(request, todo_id):
         todo = ToDo.objects.get(id=todo_id)
         todo.title = request.POST.get('title', '').strip()
         todo.description = request.POST.get('description', '').strip()
+        todo.time = request.POST.get('time', '')
         todo.save()
         return JsonResponse({'success': True})
     except ToDo.DoesNotExist:

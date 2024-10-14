@@ -21,12 +21,15 @@
         {% if todo.description %}
             <p class="description-preview">{{ todo.description|truncatewords:10 }}</p>
         {% endif %}
+        {% if todo.time %}
+            <p class="time-preview">{{ todo.time }}</p>
+        {% endif %}
 
         <button class="ui basic button toggle-button {% if todo.is_complete %}green{% else %}gray{% endif %}" data-todo-id="{{ todo.id }}">
             {% if todo.is_complete %}Завершено{% else %}Не завершено{% endif %}
         </button>
 
-        <button class="ui basic button edit-button" data-todo-id="{{ todo.id }}" data-title="{{ todo.title }}" data-description="{{ todo.description }}">Редактировать</button>
+        <button class="ui basic button edit-button" data-todo-id="{{ todo.id }}" data-title="{{ todo.title }}" data-description="{{ todo.description }}" data-time="{{ todo.time }}">Редактировать</button>
 
         <a class="ui negative basic button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
     </div>
@@ -47,6 +50,10 @@
                 <label>Описание</label>
                 <textarea name="description" id="add-description" placeholder="Введите описание задачи"></textarea>
             </div>
+            <div class="field">
+                <label>Время</label>
+                <input type="time" name="time" id="add-time" step="1">
+            </div>
             <button class="ui button" type="submit">Сохранить</button>
         </form>
     </div>
@@ -66,6 +73,10 @@
                 <label>Описание</label>
                 <textarea name="description" id="edit-description" placeholder="Введите описание задачи"></textarea>
             </div>
+            <div class="field">
+                <label>Время</label>
+                <input type="time" name="time" id="edit-time" step="1">
+            </div>
             <input type="hidden" name="todo_id" id="edit-todo-id">
             <button class="ui button" type="submit">Сохранить</button>
         </form>
@@ -84,6 +95,7 @@ $(document).ready(function() {
         event.preventDefault();
         var title = $('#add-title').val();
         var description = $('#add-description').val();
+        var time = $('#add-time').val();
         var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
 
         $.ajax({
@@ -92,7 +104,8 @@ $(document).ready(function() {
             data: {
                 csrfmiddlewaretoken: csrfToken,
                 title: title,
-                description: description
+                description: description,
+                time: time
             },
             success: function(response) {
                 location.reload();
@@ -131,10 +144,12 @@ $(document).ready(function() {
         var todoId = $(this).data('todo-id');
         var title = $(this).data('title');
         var description = $(this).data('description');
+        var time = $(this).data('time');
 
         $('#edit-todo-id').val(todoId);
         $('#edit-title').val(title);
         $('#edit-description').val(description);
+        $('#edit-time').val(time);
 
         $('#edit-modal').modal('show');
     });
@@ -144,6 +159,7 @@ $(document).ready(function() {
         var todoId = $('#edit-todo-id').val();
         var title = $('#edit-title').val();
         var description = $('#edit-description').val();
+        var time = $('#edit-time').val();
         var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
 
         $.ajax({
@@ -152,7 +168,8 @@ $(document).ready(function() {
             data: {
                 csrfmiddlewaretoken: csrfToken,
                 title: title,
-                description: description
+                description: description,
+                time: time
             },
             success: function(response) {
                 location.reload();
