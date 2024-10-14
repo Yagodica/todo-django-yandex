@@ -1,10 +1,8 @@
-# views.py
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import ToDo
-from datetime import datetime
 
 def index(request):
     todos = ToDo.objects.all()
@@ -14,9 +12,9 @@ def index(request):
 def add(request):
     title = request.POST.get('title', '').strip()
     description = request.POST.get('description', '').strip()
-    expiration_time = request.POST.get('expiration_time', '')
+    time = request.POST.get('time', '')
     if title:
-        todo = ToDo(title=title, description=description, expiration_time=expiration_time)
+        todo = ToDo(title=title, description=description, time=time)
         todo.save()
         messages.success(request, 'To-do item added successfully.')
     else:
@@ -38,7 +36,7 @@ def edit(request, todo_id):
         todo = ToDo.objects.get(id=todo_id)
         todo.title = request.POST.get('title', '').strip()
         todo.description = request.POST.get('description', '').strip()
-        todo.expiration_time = request.POST.get('expiration_time', '')
+        todo.time = request.POST.get('time', '')
         todo.save()
         return JsonResponse({'success': True})
     except ToDo.DoesNotExist:
