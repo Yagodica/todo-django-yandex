@@ -10,7 +10,14 @@
    <title>{{ title }} </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="{% static 'style.css' %}">
-
+    <style>
+        .no-border-form {
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,9 +25,9 @@
     <a class="item" href="{% url 'index' %}">Главная</a>
     {% if user.is_authenticated %}
         <span class="item">Привет, {{ user.username }}!</span>
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        <form method="post" action="{% url 'logout' %}" class="no-border-form" style="display:inline;">
             {% csrf_token %}
-            <button type="submit" class="ui item">Выйти</button>
+            <a class="item" href="#" onclick="this.closest('form').submit()">Выйти</a>
         </form>
     {% else %}
         <a class="item" href="{% url 'login' %}">Войти</a>
