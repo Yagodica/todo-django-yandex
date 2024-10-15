@@ -3,9 +3,24 @@
 {% block content %}
 <div class="ui container" style="margin-top: 50px;">
     <h2>Регистрация</h2>
-    <form method="post">
+    <form class="ui form" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="field">
+            <label>Имя пользователя</label>
+            {{ form.username }}
+        </div>
+        <div class="field">
+            <label>Email</label>
+            {{ form.email }}
+        </div>
+        <div class="field">
+            <label>Пароль</label>
+            {{ form.password1 }}
+        </div>
+        <div class="field">
+            <label>Подтверждение пароля</label>
+            {{ form.password2 }}
+        </div>
         <button class="ui button" type="submit">Зарегистрироваться</button>
     </form>
 </div>
