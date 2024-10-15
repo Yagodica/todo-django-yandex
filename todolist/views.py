@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from .models import ToDo
 
 
@@ -18,6 +19,12 @@ def add(request):
     title = request.POST.get('title', '').strip()
     description = request.POST.get('description', '').strip()
     deadline = request.POST.get('deadline', '')
+
+    if not deadline:
+        deadline = None
+    else:
+        deadline = timezone.make_aware(timezone.datetime.strptime(deadline, '%Y-%m-%dT%H:%M'))
+    
     if title:
         todo = ToDo(title=title, description=description, deadline=deadline, user=request.user)
         todo.save()
@@ -25,6 +32,7 @@ def add(request):
     else:
         messages.error(request, 'Title cannot be empty.')
     return redirect('index')
+
 
 @login_required
 def update(request, todo_id):
@@ -43,12 +51,19 @@ def edit(request, todo_id):
         todo = ToDo.objects.get(id=todo_id, user=request.user)
         todo.title = request.POST.get('title', '').strip()
         todo.description = request.POST.get('description', '').strip()
-        todo.deadline = request.POST.get('deadline', '')
+        deadline = request.POST.get('deadline', '')
+
+        if not deadline:
+            deadline = None
+        else:
+            deadline = timezone.make_aware(timezone.datetime.strptime(deadline, '%Y-%m-%dT%H:%M'))
+        
+        todo.deadline = deadline
         todo.save()
         return JsonResponse({'success': True})
     except ToDo.DoesNotExist:
         return JsonResponse({'error': 'To-do item does not exist.'}, status=404)
-
+  
 @login_required
 def delete(request, todo_id):
     try:
